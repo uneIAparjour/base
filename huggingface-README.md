@@ -2,7 +2,7 @@
 license: cc-by-4.0
 language:
   - fr
-pretty_name: "Base #uneIAparjour — Outils IA générative"
+pretty_name: "Base uneIAparjour.fr — Applications IA génératives"
 size_categories:
   - 1K<n<10K
 task_categories:
@@ -12,7 +12,6 @@ tags:
   - generative-ai
   - curation
   - french
-  - education
   - daily-updates
 source_datasets: []
 dataset_info:
@@ -39,7 +38,7 @@ dataset_info:
       dtype: string
 ---
 
-# Base #uneIAparjour — Outils IA générative
+# Base uneIAparjour.fr — Applications IA génératives
 
 Base de données ouverte recensant **un outil d'IA générative par jour** depuis le 16 février 2023, présentés sur [uneiaparjour.fr](https://www.uneiaparjour.fr/).
 
@@ -51,7 +50,7 @@ Chaque jour, un nouvel outil d'IA générative gratuit ou freemium est testé, d
 
 - **1 093 outils** (au 14 février 2026)
 - **33 catégories** : chatbot, images, texte, vidéo, musique, éducation, open source…
-- **Période** : 16 février 2023 → aujourd'hui (mise à jour quotidienne)
+- **Période** : 16 février 2023 → 14 février 2026
 - **Langue** : français
 
 ## Champs
@@ -62,7 +61,7 @@ Chaque jour, un nouvel outil d'IA générative gratuit ou freemium est testé, d
 | `Description` | Présentation éditoriale de l'outil |
 | `URL sur uneiaparjour.fr` | Lien vers l'article complet |
 | `Catégorie 1` à `Catégorie 6` | Jusqu'à 6 catégories |
-| `Date de publication` | Date au format AAAA-MM-JJ |
+| `Date de publication` | Date au format JJ-MM-AAAA |
 
 ## Utilisation
 
@@ -85,8 +84,8 @@ Newsletter : [Substack](https://uneiaparjour.substack.com/)
 
 ## Auteur et licence
 
-**Bertrand Formet** — Coordinateur au numérique éducatif, Réseau Canopé
+**Bertrand Formet** 
 
 Licence : [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
-> #uneIAparjour par Bertrand Formet est sous licence CC BY 4.0
+> Base de données du site uneIAparjour.fr au 14/02/2026, Bertrand Formet, licence CC BY 4.0.
