@@ -1,4 +1,4 @@
-# agent.md — Base #uneIAparjour
+# agent.md — Base uneIAparjour.fr
 
 ## Contexte
 
@@ -21,13 +21,13 @@ agent.md                  # Ce fichier (instructions pour agents IA)
 | Description | texte | oui | Présentation éditoriale complète |
 | URL sur uneiaparjour.fr | URL | oui | Lien vers l'article sur le site |
 | Catégorie 1 à 6 | texte | cat. 1 oui | Parmi les 33 catégories existantes |
-| Date de publication | date | oui | Format AAAA-MM-JJ |
+| Date de publication | date | oui | Format JJ-MM-AAAA |
 
 ## Règles impératives
 
 1. **Ne jamais modifier les URLs** — Les extraire fidèlement, ne jamais les inventer
 2. **Ne jamais modifier le CSV directement** — Il est généré automatiquement depuis l'ODS
-3. **Format de date** : toujours `AAAA-MM-JJ` (ISO 8601)
+3. **Format de date** : toujours `JJ-MM-AAAA`
 4. **Catégories** : utiliser exclusivement les 33 catégories existantes, respecter la casse exacte (minuscules sauf `FR / EU` et `LLM`)
 5. **Un article = un jour** — Sauf rares exceptions (bonus 365e jour d'une année)
 6. **Ordre** : chronologique inverse (plus récent en premier)
@@ -59,4 +59,4 @@ Certains outils sont présentés une seconde fois après évolution significativ
 
 ## Mise à jour
 
-La base est mise à jour quotidiennement avec chaque nouvel article publié sur uneiaparjour.fr. Le CSV est regénéré automatiquement via GitHub Actions à chaque push de l'ODS.
+La base est mise à jour désormais tous les 6 mois environ. Le CSV est regénéré automatiquement via GitHub Actions à chaque push de l'ODS.
