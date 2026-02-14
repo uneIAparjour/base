@@ -1,4 +1,4 @@
-# Base #uneIAparjour
+# Base uneIAparjour.fr
 
 Base de données ouverte recensant les outils d'IA générative présentés quotidiennement sur [uneiaparjour.fr](https://www.uneiaparjour.fr/) depuis le 16 février 2023.
 
@@ -12,7 +12,7 @@ Un outil par jour, décrit et catégorisé :
 | `Description` | Présentation éditoriale |
 | `URL sur uneiaparjour.fr` | Article sur le site |
 | `Catégorie 1` à `Catégorie 6` | Jusqu'à 6 catégories parmi 33 |
-| `Date de publication` | Date de publication (AAAA-MM-JJ) |
+| `Date de publication` | Date de publication (JJ-MM-AAAA) |
 
 ## Formats disponibles
 
@@ -44,13 +44,12 @@ actualités et fact-checking · application · archives · automatisation · ban
 
 Pour citer cette base :
 
-> #uneIAparjour par Bertrand Formet est sous licence [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+> Base de données du site uneIAparjour.fr, Bertrand Formet, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
 ## Auteur
+🔗 [Bertrand Formet](https://www.linkedin.com/in/bertrandformet/)
 
-**Bertrand Formet** — Coordinateur au numérique éducatif, Réseau Canopé
-
+**Liens** 
 - 🌐 [uneiaparjour.fr](https://www.uneiaparjour.fr/)
 - 📰 [Newsletter Substack](https://uneiaparjour.substack.com/)
-- 🔗 [LinkedIn](https://www.linkedin.com/in/bertrandformet/)
-- 🦋 [Bluesky](https://bsky.app/profile/uneiaparjour.bsky.social)
+
