@@ -36,7 +36,6 @@ actualités et fact-checking · application · archives · automatisation · ban
 
 - 📥 [uneiaparjour.fr/base](https://www.uneiaparjour.fr/base/) — Téléchargement direct
 - 🤗 [Hugging Face Datasets](https://huggingface.co/datasets/uneIAparjour/base) — Exploration interactive et API
-- 🇫🇷 [data.gouv.fr](https://www.data.gouv.fr/) — Open data français
 
 ## Licence
 
