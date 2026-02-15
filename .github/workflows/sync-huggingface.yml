@@ -1,0 +1,35 @@
+name: Synchroniser vers Hugging Face
+
+on:
+  push:
+    paths:
+      - 'base-uneiaparjour.csv'
+
+jobs:
+  sync-to-hf:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Pousser vers Hugging Face Hub
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          git lfs install
+          
+          git clone https://huggingface.co/datasets/uneIAparjour/base hf-dataset
+          cd hf-dataset
+          
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin https://uneIAparjour:${HF_TOKEN}@huggingface.co/datasets/uneIAparjour/base
+          
+          cp ../base-uneiaparjour.csv .
+          cp ../base-uneiaparjour.ods .
+          cp ../huggingface-README.md README.md
+          
+          git add -A
+          git diff --cached --quiet || git commit -m "🔄 Mise à jour base ($(date +%Y-%m-%d))"
+          git push
