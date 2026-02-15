@@ -1,0 +1,42 @@
+name: Générer CSV depuis ODS
+
+on:
+  push:
+    paths:
+      - 'base-uneiaparjour.ods'
+
+jobs:
+  generate-csv:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Installer Python et dépendances
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Installer les bibliothèques
+        run: pip install pandas odfpy
+
+      - name: Convertir ODS en CSV
+        run: |
+          python3 << 'EOF'
+          import pandas as pd
+          
+          df = pd.read_excel('base-uneiaparjour.ods', engine='odf', sheet_name='Base')
+          df['Date de publication'] = pd.to_datetime(df['Date de publication']).dt.strftime('%d/%m/%Y')
+          df.to_csv('base-uneiaparjour.csv', index=False, encoding='utf-8')
+          
+          print(f"CSV généré : {len(df)} lignes, {len(df.columns)} colonnes")
+          EOF
+
+      - name: Commit et push si modifié
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add base-uneiaparjour.csv
+          git diff --cached --quiet || git commit -m "🔄 Mise à jour CSV ($(date +%Y-%m-%d))"
+          git push
