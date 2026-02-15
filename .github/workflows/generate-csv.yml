@@ -1,4 +1,4 @@
-name: Générer CSV depuis ODS
+name: Générer CSV et synchroniser Hugging Face
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - 'base-uneiaparjour.ods'
 
 jobs:
-  generate-csv:
+  generate-and-sync:
     runs-on: ubuntu-latest
     
     steps:
@@ -33,10 +33,31 @@ jobs:
           print(f"CSV généré : {len(df)} lignes, {len(df.columns)} colonnes")
           EOF
 
-      - name: Commit et push si modifié
+      - name: Commit et push CSV
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add base-uneiaparjour.csv
           git diff --cached --quiet || git commit -m "🔄 Mise à jour CSV ($(date +%Y-%m-%d))"
+          git push
+
+      - name: Synchroniser vers Hugging Face
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          git lfs install
+          
+          git clone https://huggingface.co/datasets/uneIAparjour/base hf-dataset
+          cd hf-dataset
+          
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin https://uneIAparjour:${HF_TOKEN}@huggingface.co/datasets/uneIAparjour/base
+          
+          cp ../base-uneiaparjour.csv .
+          cp ../base-uneiaparjour.ods .
+          cp ../huggingface-README.md README.md
+          
+          git add -A
+          git diff --cached --quiet || git commit -m "🔄 Mise à jour base ($(date +%Y-%m-%d))"
           git push
