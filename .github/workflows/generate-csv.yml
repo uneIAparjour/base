@@ -28,9 +28,17 @@ jobs:
           
           df = pd.read_excel('base-uneiaparjour.ods', engine='odf', sheet_name='Base')
           df['Date de publication'] = pd.to_datetime(df['Date de publication']).dt.strftime('%d/%m/%Y')
-          df.to_csv('base-uneiaparjour.csv', index=False, encoding='utf-8')
           
-          print(f"CSV généré : {len(df)} lignes, {len(df.columns)} colonnes")
+          # Exclure les articles Focus Lettre (toutes colonnes Catégorie)
+          cat_cols = [c for c in df.columns if 'atégorie' in c]
+          mask_focus = df[cat_cols].apply(
+              lambda col: col.str.lower().str.strip().isin(['focus lettre', 'focus-lettre'])
+          ).any(axis=1)
+          nb_exclus = mask_focus.sum()
+          df = df[~mask_focus]
+          
+          df.to_csv('base-uneiaparjour.csv', index=False, encoding='utf-8')
+          print(f"CSV généré : {len(df)} lignes, {len(df.columns)} colonnes ({nb_exclus} Focus Lettre exclus)")
           EOF
 
       - name: Commit et push CSV
