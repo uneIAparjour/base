@@ -96,6 +96,19 @@ def build_paged_url(base_url, page):
     return parsed._replace(query=new_query).geturl()
 
 
+def get_existing_urls(base_sheet):
+    """Récupère toutes les URLs déjà présentes dans l'ODS (colonne 2)."""
+    urls = set()
+    rows = base_sheet.getElementsByType(TableRow)
+    for row in rows[1:]:
+        cell = get_cell_at_index(row, 2)
+        if cell:
+            url = get_cell_text(cell).strip()
+            if url:
+                urls.add(url)
+    return urls
+
+
 def get_last_date_from_ods(ods_path):
     doc = load(ods_path)
     sheets = doc.spreadsheet.getElementsByType(Table)
@@ -105,8 +118,8 @@ def get_last_date_from_ods(ods_path):
         cell = get_cell_at_index(row, 9)
         if cell is None:
             continue
-        date_str = get_cell_text(cell)
-        if date_str.strip():
+        date_str = get_cell_text(cell).strip()
+        if date_str:
             print(f"Date lue : '{date_str}'")
             return parse_ods_date(date_str), doc
     return None, None
@@ -177,7 +190,7 @@ def make_row(entry):
 def main():
     print("Mise a jour incrementale ODS...")
 
-    last_date, doc = get_last_date_from_ods(ODS_PATH)
+    last_date, _ = get_last_date_from_ods(ODS_PATH)
     if last_date:
         print(f"Dernier article : {last_date.strftime('%d/%m/%Y')}")
     else:
@@ -195,33 +208,47 @@ def main():
     base_sheet = next(s for s in sheets if s.getAttribute('name') == 'Base')
     rows = base_sheet.getElementsByType(TableRow)
 
-    # Trouver la premiere ligne non vide pour l'insertion
+    # Récupérer les URLs existantes pour éviter les doublons
+    existing_urls = get_existing_urls(base_sheet)
+    print(f"URLs existantes : {len(existing_urls)}")
+
+    # Trouver la première ligne non vide pour l'insertion
     insert_before_row = None
     for row in rows[1:]:
         cell = get_cell_at_index(row, 0)
         if cell and get_cell_text(cell).strip():
             insert_before_row = row
             break
-
     if insert_before_row is None:
         insert_before_row = rows[1]
 
     inserted = 0
-    skipped = 0
+    skipped_focus = 0
+    skipped_duplicate = 0
     rows_to_insert = []
+
     for entry in new_entries:
+        link = entry.get("link", "")
+        if link in existing_urls:
+            skipped_duplicate += 1
+            print(f"   Doublon ignore : {entry.get('title', '')}")
+            continue
+
         row = make_row(entry)
         if row is not None:
             rows_to_insert.append(row)
+            existing_urls.add(link)
         else:
-            skipped += 1
+            skipped_focus += 1
 
     for row in reversed(rows_to_insert):
         base_sheet.insertBefore(row, insert_before_row)
         inserted += 1
 
-    if skipped:
-        print(f"{skipped} Focus ignores")
+    if skipped_focus:
+        print(f"{skipped_focus} Focus ignores")
+    if skipped_duplicate:
+        print(f"{skipped_duplicate} doublons ignores")
 
     if inserted > 0:
         doc2.save(ODS_PATH)
