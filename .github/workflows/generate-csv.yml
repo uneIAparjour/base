@@ -28,7 +28,7 @@ jobs:
           import pandas as pd
           
           df = pd.read_excel('base-uneiaparjour.ods', engine='odf', sheet_name='Base')
-df['Date de publication'] = pd.to_datetime(df['Date de publication'], format='%d/%m/%Y').dt.strftime('%d/%m/%Y')          
+          df['Date de publication'] = pd.to_datetime(df['Date de publication'], format='%d/%m/%Y').dt.strftime('%d/%m/%Y')          
           # Exclure les articles Focus Lettre (toutes colonnes Catégorie)
           cat_cols = [c for c in df.columns if 'atégorie' in c]
           mask_focus = df[cat_cols].apply(
