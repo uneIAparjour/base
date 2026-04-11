@@ -28,10 +28,10 @@ jobs:
         id: update_ods
         run: |
           python update_ods.py
-          if git diff HEAD --quiet base-uneiaparjour.ods; then
-            echo "modified=false" >> $GITHUB_OUTPUT
-          else
+          if [ $? -eq 0 ] && git status --porcelain base-uneiaparjour.ods | grep -q .; then
             echo "modified=true" >> $GITHUB_OUTPUT
+          else
+            echo "modified=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Generate CSV
