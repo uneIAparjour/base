@@ -24,10 +24,10 @@ jobs:
       - name: Install deps
         run: pip install feedparser odfpy pandas
 
-      - name: Update ODS
+           - name: Update ODS
         id: update_ods
         run: |
-          python update_ods.py
+          python debug_ods.py
           if git diff --quiet base-uneiaparjour.ods; then
             echo "modified=false" >> $GITHUB_OUTPUT
           else
