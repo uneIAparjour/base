@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""
+
 update_ods.py — Mise à jour incrémentale de base-uneiaparjour.ods
 depuis le flux RSS de uneiaparjour.fr
 
