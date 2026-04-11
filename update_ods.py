@@ -67,7 +67,8 @@ def extract_first_paragraph(entry):
 
 def parse_ods_date(date_str):
     try:
-        return datetime.strptime(date_str, "%d/%m/%Y").replace(tzinfo=timezone.utc)
+        dt = datetime.strptime(date_str, "%d/%m/%Y")
+        return dt.replace(hour=23, minute=59, second=59, tzinfo=timezone.utc)
     except (ValueError, TypeError):
         return None
 
