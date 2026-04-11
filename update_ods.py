@@ -1,16 +1,4 @@
 #!/usr/bin/env python3
-"""
-update_ods.py — Mise à jour incrémentale de base-uneiaparjour.ods
-depuis le flux RSS de uneiaparjour.fr
-
-Logique :
-1. Lit la date de la ligne 2 de l'ODS (article le plus récent)
-2. Récupère les articles du RSS publiés après cette date
-3. Filtre les Focus (catégorie = 'Focus')
-4. Insère les nouveaux articles en haut de l'ODS (après en-tête)
-5. Sauvegarde l'ODS si des articles ont été ajoutés
-"""
-
 import re
 import sys
 import time
@@ -43,6 +31,17 @@ def get_cell_text(cell):
                 if hasattr(child, 'data'):
                     text += child.data
     return text
+
+
+def get_cell_at_index(row, target_index):
+    cells = row.getElementsByType(TableCell)
+    current = 0
+    for cell in cells:
+        repeat = int(cell.getAttribute('numbercolumnsrepeated') or 1)
+        if current + repeat > target_index:
+            return cell
+        current += repeat
+    return None
 
 
 def strip_html(html_text):
@@ -102,12 +101,13 @@ def get_last_date_from_ods(ods_path):
     base_sheet = next(s for s in sheets if s.getAttribute('name') == 'Base')
     rows = base_sheet.getElementsByType(TableRow)
     if len(rows) < 2:
-        return None
-    cells = rows[1].getElementsByType(TableCell)
-    for i, cell in enumerate(cells):
-        if i == 9:
-            return parse_ods_date(get_cell_text(cell))
-    return None
+        return None, None
+    cell = get_cell_at_index(rows[1], 9)
+    if cell is None:
+        return None, None
+    date_str = get_cell_text(cell)
+    print(f"   Date lue en colonne 9 : '{date_str}'")
+    return parse_ods_date(date_str), doc
 
 
 def fetch_new_entries(last_date):
@@ -117,11 +117,10 @@ def fetch_new_entries(last_date):
 
     while True:
         url = build_paged_url(FEED_URL, page) if page > 1 else FEED_URL
-        print(f"📡 Page {page} : {url}")
+        print(f"RSS page {page}")
         feed = feedparser.parse(url)
 
         if not feed.entries:
-            print(f"   → Fin (page vide)")
             break
 
         found_older = False
@@ -140,7 +139,7 @@ def fetch_new_entries(last_date):
             new_entries.append(entry)
             new_on_page += 1
 
-        print(f"   → {new_on_page} nouveaux (total : {len(new_entries)})")
+        print(f"   {new_on_page} nouveaux (total: {len(new_entries)})")
 
         if found_older:
             break
@@ -173,56 +172,51 @@ def make_row(entry):
     return row
 
 
-def insert_rows_into_ods(ods_path, new_entries):
-    doc = load(ods_path)
-    sheets = doc.spreadsheet.getElementsByType(Table)
-    base_sheet = next(s for s in sheets if s.getAttribute('name') == 'Base')
-    rows = base_sheet.getElementsByType(TableRow)
-    second_row = rows[1]
-
-    rows_to_insert = []
-    skipped_focus = 0
-    for entry in new_entries:
-        row = make_row(entry)
-        if row is not None:
-            rows_to_insert.append(row)
-        else:
-            skipped_focus += 1
-
-    for row in reversed(rows_to_insert):
-        base_sheet.insertBefore(row, second_row)
-
-    inserted = len(rows_to_insert)
-
-    if skipped_focus:
-        print(f"   → {skipped_focus} Focus ignorés")
-
-    if inserted > 0:
-        doc.save(ods_path)
-        print(f"✅ {inserted} article(s) ajouté(s) — ODS sauvegardé")
-    else:
-        print("ℹ️  Aucun nouvel article à ajouter (hors Focus)")
-
-    return inserted
-
-
 def main():
-    print("🔄 Mise à jour incrémentale de l'ODS...")
+    print("Mise a jour incrementale ODS...")
 
-    last_date = get_last_date_from_ods(ODS_PATH)
+    last_date, doc = get_last_date_from_ods(ODS_PATH)
     if last_date:
-        print(f"📅 Dernier article en base : {last_date.strftime('%d/%m/%Y')}")
+        print(f"Dernier article : {last_date.strftime('%d/%m/%Y')}")
     else:
-        print("⚠️  Impossible de lire la date du dernier article", file=sys.stderr)
+        print("Impossible de lire la date", file=sys.stderr)
         sys.exit(1)
 
     new_entries = fetch_new_entries(last_date)
 
     if not new_entries:
-        print("✓ Base à jour, aucun nouvel article")
+        print("Base a jour")
         sys.exit(0)
 
-    insert_rows_into_ods(ODS_PATH, new_entries)
+    doc2 = load(ODS_PATH)
+    sheets = doc2.spreadsheet.getElementsByType(Table)
+    base_sheet = next(s for s in sheets if s.getAttribute('name') == 'Base')
+    rows = base_sheet.getElementsByType(TableRow)
+    second_row = rows[1]
+
+    inserted = 0
+    skipped = 0
+    rows_to_insert = []
+    for entry in new_entries:
+        row = make_row(entry)
+        if row is not None:
+            rows_to_insert.append(row)
+        else:
+            skipped += 1
+
+    for row in reversed(rows_to_insert):
+        base_sheet.insertBefore(row, second_row)
+        inserted += 1
+
+    if skipped:
+        print(f"{skipped} Focus ignores")
+
+    if inserted > 0:
+        doc2.save(ODS_PATH)
+        print(f"{inserted} article(s) ajoutes")
+    else:
+        print("Aucun article a ajouter")
+
     sys.exit(0)
 
 
