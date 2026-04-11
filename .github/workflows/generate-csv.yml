@@ -5,6 +5,7 @@ on:
     paths:
       - 'base-uneiaparjour.ods'
 
+  workflow_dispatch:
 jobs:
   generate-and-sync:
     runs-on: ubuntu-latest
