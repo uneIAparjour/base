@@ -100,14 +100,15 @@ def get_last_date_from_ods(ods_path):
     sheets = doc.spreadsheet.getElementsByType(Table)
     base_sheet = next(s for s in sheets if s.getAttribute('name') == 'Base')
     rows = base_sheet.getElementsByType(TableRow)
-    if len(rows) < 2:
-        return None, None
-    cell = get_cell_at_index(rows[1], 9)
-    if cell is None:
-        return None, None
-    date_str = get_cell_text(cell)
-    print(f"   Date lue en colonne 9 : '{date_str}'")
-    return parse_ods_date(date_str), doc
+    for row in rows[1:]:
+        cell = get_cell_at_index(row, 9)
+        if cell is None:
+            continue
+        date_str = get_cell_text(cell)
+        if date_str.strip():
+            print(f"Date lue : '{date_str}'")
+            return parse_ods_date(date_str), doc
+    return None, None
 
 
 def fetch_new_entries(last_date):
@@ -192,7 +193,17 @@ def main():
     sheets = doc2.spreadsheet.getElementsByType(Table)
     base_sheet = next(s for s in sheets if s.getAttribute('name') == 'Base')
     rows = base_sheet.getElementsByType(TableRow)
-    second_row = rows[1]
+
+    # Trouver la premiere ligne non vide pour l'insertion
+    insert_before_row = None
+    for row in rows[1:]:
+        cell = get_cell_at_index(row, 0)
+        if cell and get_cell_text(cell).strip():
+            insert_before_row = row
+            break
+
+    if insert_before_row is None:
+        insert_before_row = rows[1]
 
     inserted = 0
     skipped = 0
@@ -205,7 +216,7 @@ def main():
             skipped += 1
 
     for row in reversed(rows_to_insert):
-        base_sheet.insertBefore(row, second_row)
+        base_sheet.insertBefore(row, insert_before_row)
         inserted += 1
 
     if skipped:
