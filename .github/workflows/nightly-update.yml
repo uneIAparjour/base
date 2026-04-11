@@ -40,6 +40,7 @@ jobs:
           python3 << 'EOF'
           import pandas as pd
           df = pd.read_excel('base-uneiaparjour.ods', engine='odf', sheet_name='Base')
+          df = df.dropna(how='all')
           df['Date de publication'] = pd.to_datetime(df['Date de publication'], format='%d/%m/%Y').dt.strftime('%d/%m/%Y')
           cat_cols = [c for c in df.columns if 'atégorie' in c]
           mask_focus = df[cat_cols].apply(lambda col: col.str.lower().str.strip().isin(['focus lettre', 'focus-lettre', 'focus'])).any(axis=1)
