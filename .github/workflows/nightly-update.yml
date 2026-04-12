@@ -28,7 +28,7 @@ jobs:
         id: update_ods
         run: |
           python update_ods.py
-          if [ $? -eq 0 ] && git status --porcelain base-uneiaparjour.ods | grep -q .; then
+          if git status --porcelain base-uneiaparjour.ods | grep -q .; then
             echo "modified=true" >> $GITHUB_OUTPUT
           else
             echo "modified=false" >> $GITHUB_OUTPUT
@@ -49,12 +49,27 @@ jobs:
           print(f"CSV : {len(df)} lignes")
           EOF
 
+      - name: Update READMEs
+        if: steps.update_ods.outputs.modified == 'true'
+        run: |
+          NB=$(( $(wc -l < base-uneiaparjour.csv) - 1 ))
+          DATE=$(date -u +'%d/%m/%Y')
+
+          sed -i "s/\*\*[0-9 ]* outils\*\* recensés (au .*)/\*\*${NB} outils\*\* recensés (au ${DATE})/" README.md
+          sed -i "s/Plage : .*→.*/Plage : 16\/02\/2023 → ${DATE}/" README.md
+
+          sed -i "s/\*\*[0-9 ]* outils\*\* (au .*)/\*\*${NB} outils\*\* (au ${DATE})/" huggingface-README.md
+          sed -i "s/\*\*Période\*\* : .*/\*\*Période\*\* : 16 février 2023 → ${DATE}/" huggingface-README.md
+          sed -i "s/Base de données du site uneIAparjour.fr au .*, Bertrand/Base de données du site uneIAparjour.fr au ${DATE}, Bertrand/" huggingface-README.md
+
+          echo "READMEs mis a jour : ${NB} outils au ${DATE}"
+
       - name: Commit
         if: steps.update_ods.outputs.modified == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add base-uneiaparjour.ods base-uneiaparjour.csv
+          git add base-uneiaparjour.ods base-uneiaparjour.csv README.md huggingface-README.md
           git diff --cached --quiet || git commit -m "nightly update $(date -u +'%d/%m/%Y')"
           git push
 
