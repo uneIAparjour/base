@@ -21,6 +21,17 @@ Un outil par jour, décrit et catégorisé :
 
 Le fichier CSV est généré automatiquement à chaque mise à jour de l'ODS.
 
+## Mises à jour automatiques
+
+La base est mise à jour automatiquement chaque nuit via GitHub Actions :
+
+- Un script récupère les nouveaux articles publiés sur le site depuis le RSS du site
+- Les articles de la catégorie Focus Lettre sont exclus
+- L'ODS, le CSV et ce README sont mis à jour et publiés automatiquement
+- La base Hugging Face est synchronisée dans la foulée
+
+Le workflow est également déclenchable manuellement depuis l'onglet Actions du dépôt.
+
 ## Catégories
 
 actualités et fact-checking · application · archives · automatisation · bande dessinée · chatbot · données · documents · éducation · FR / EU · histoires enfants · images · images 3D · infographie · jeu vidéo · langues · LLM · mindmap · musique · navigateur · open source · présentation · qr code · quiz et flashcards · recherche · sans compte · site web · texte · tutoriel · usage illimité · vidéo · voix · youtube
