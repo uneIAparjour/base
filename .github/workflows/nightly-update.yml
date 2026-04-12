@@ -52,18 +52,30 @@ jobs:
       - name: Update READMEs
         if: always()
         run: |
-          NB=$(( $(wc -l < base-uneiaparjour.csv) - 1 ))
-          DATE=$(date -u +'%d/%m/%Y')
+          python3 << 'EOF'
+          import re
+          from datetime import datetime, timezone
 
-          sed -i "s|**[0-9]* outils** recensés (au .*)|**${NB} outils** recensés (au ${DATE})|" README.md
-          sed -i "s|Plage : .*|Plage : 16/02/2023 → ${DATE}|" README.md
+          nb = sum(1 for _ in open('base-uneiaparjour.csv')) - 1
+          date = datetime.now(timezone.utc).strftime('%d/%m/%Y')
 
-          sed -i "s|**[0-9]* outils** (au .*)|**${NB} outils** (au ${DATE})|" huggingface-README.md
-          sed -i "s|**Période** : .*|**Période** : 16 février 2023 → ${DATE}|" huggingface-README.md
-          sed -i "s|Base de données du site uneIAparjour.fr au .*, Bertrand|Base de données du site uneIAparjour.fr au ${DATE}, Bertrand|" huggingface-README.md
-
-          echo "READMEs mis a jour : ${NB} outils au ${DATE}"
-
+          for fname, patterns in {
+              'README.md': [
+                  (r'\*\*\d[\d ]* outils\*\* recensés \(au [^\)]+\)', f'**{nb} outils** recensés (au {date})'),
+                  (r'Plage : [\d/]+ → [\d/]+', f'Plage : 16/02/2023 → {date}'),
+              ],
+              'huggingface-README.md': [
+                  (r'\*\*\d[\d ]* outils\*\* \(au [^\)]+\)', f'**{nb} outils** (au {date})'),
+                  (r'\*\*Période\*\* : .+', f'**Période** : 16 février 2023 → {date}'),
+                  (r'Base de données du site uneIAparjour\.fr au [\d/]+, Bertrand', f'Base de données du site uneIAparjour.fr au {date}, Bertrand'),
+              ],
+          }.items():
+              content = open(fname, encoding='utf-8').read()
+              for pattern, replacement in patterns:
+                  content = re.sub(pattern, replacement, content)
+              open(fname, 'w', encoding='utf-8').write(content)
+              print(f'{fname} mis a jour : {nb} outils au {date}')
+          EOF
       - name: Commit
         if: always()
         run: |
