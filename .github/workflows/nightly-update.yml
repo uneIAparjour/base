@@ -86,7 +86,7 @@ jobs:
           git push
 
       - name: Sync Hugging Face
-        if: steps.update_ods.outputs.modified == 'true'
+        if: always()
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
