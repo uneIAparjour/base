@@ -2,7 +2,7 @@
 
 ## Contexte
 
-Ce dépôt contient la base de données du site uneiaparjour.fr : un outil d'IA générative présenté chaque jour depuis le 16 février 2023 par Bertrand Formet.
+Ce dépôt contient la base de données du site uneiaparjour.fr : une application d'IA générative présentée chaque jour depuis le 16 février 2023 par Bertrand Formet.
 
 ## Structure des fichiers
 
@@ -19,18 +19,18 @@ agent.md                  # Ce fichier (instructions pour agents IA)
 |---|---|---|---|
 | Titre | texte | oui | Nom de l'outil |
 | Description | texte | oui | Présentation éditoriale complète |
-| URL sur uneiaparjour.fr | URL | oui | Lien vers l'article sur le site |
+| URL de l'article | URL | oui | Lien vers l'article sur le site |
 | Catégorie 1 à 6 | texte | cat. 1 oui | Parmi les 33 catégories existantes |
-| Date de publication | date | oui | Format JJ-MM-AAAA |
+| Date de publication | date | oui | Format JJ/MM/AAAA |
 
 ## Règles impératives
 
 1. **Ne jamais modifier les URLs** — Les extraire fidèlement, ne jamais les inventer
 2. **Ne jamais modifier le CSV directement** — Il est généré automatiquement depuis l'ODS
-3. **Format de date** : toujours `JJ-MM-AAAA`
+3. **Format de date** : toujours `JJ/MM/AAAA`
 4. **Catégories** : utiliser exclusivement les 33 catégories existantes, respecter la casse exacte (minuscules sauf `FR / EU` et `LLM`)
-5. **Un article = un jour** — Sauf rares exceptions (bonus 365e jour d'une année)
-6. **Ordre** : chronologique inverse (plus récent en premier)
+5. **Un article = un jour** — Sauf rares exceptions
+6. **Ordre** : ante-chronologique (plus récent en premier)
 
 ## Les 33 catégories valides
 
@@ -59,4 +59,6 @@ Certains outils sont présentés une seconde fois après évolution significativ
 
 ## Mise à jour
 
-La base est mise à jour désormais tous les 6 mois environ. Le CSV est regénéré automatiquement via GitHub Actions à chaque push de l'ODS.
+La base est mise à jour **automatiquement chaque nuit** via le workflow `nightly-update.yml` (GitHub Actions, 2h00 UTC) : lecture du RSS WordPress, insertion des nouveaux articles dans l'ODS, génération du CSV, mise à jour des READMEs et synchronisation vers Hugging Face.
+
+En cas de mise à jour manuelle de l'ODS, pousser le fichier sur GitHub déclenche automatiquement `generate-csv.yml` qui regénère le CSV et synchronise Hugging Face.
