@@ -15,7 +15,7 @@ jobs:
           import re
           from datetime import datetime, timezone
 
-          nb = sum(1 for _ in open('base-uneiaparjour.csv')) - 1
+          nb = sum(1 for line in open('base-uneiaparjour.csv') if line.strip()) - 1
           date = datetime.now(timezone.utc).strftime('%d/%m/%Y')
 
           for fname, patterns in {
