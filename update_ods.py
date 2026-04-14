@@ -165,6 +165,15 @@ def fetch_new_entries(last_date):
     return new_entries
 
 
+def make_cell(val):
+    """Crée une cellule ODS avec un nœud texte explicite, lisible par pandas."""
+    cell = TableCell()
+    p = P()
+    p.addText(str(val))
+    cell.addElement(p)
+    return cell
+
+
 def make_row(entry):
     categories = [tag.term for tag in getattr(entry, "tags", [])]
 
@@ -181,9 +190,7 @@ def make_row(entry):
 
     row = TableRow()
     for val in values:
-        cell = TableCell()
-        cell.addElement(P(text=val))
-        row.addElement(cell)
+        row.addElement(make_cell(val))
     return row
 
 
