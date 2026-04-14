@@ -1,72 +1,91 @@
-name: Générer CSV et synchroniser Hugging Face
-
+name: generate-and-sync
 on:
   push:
     paths:
       - 'base-uneiaparjour.ods'
-
   workflow_dispatch:
+permissions:
+  contents: write
 jobs:
-  generate-and-sync:
+  generate:
     runs-on: ubuntu-latest
-    
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Installer Python et dépendances
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
-
-      - name: Installer les bibliothèques
+          python-version: "3.12"
+      - name: Install deps
         run: pip install pandas odfpy
-
-      - name: Convertir ODS en CSV
+      - name: Generate CSV
         run: |
           python3 << 'EOF'
           import pandas as pd
-          
-          df = pd.read_excel('base-uneiaparjour.ods', engine='odf', sheet_name='Base')
-          df = df.dropna(how='all')
-          df['Date de publication'] = pd.to_datetime(df['Date de publication'], format='%d/%m/%Y').dt.strftime('%d/%m/%Y')          
-          # Exclure les articles Focus Lettre (toutes colonnes Catégorie)
+
+          df_raw = pd.read_excel('base-uneiaparjour.ods', engine='odf', sheet_name='Base')
+          print(f"1. Apres lecture ODS : {len(df_raw)} lignes")
+
+          df = df_raw.dropna(how='all')
+          print(f"2. Apres dropna(how='all') : {len(df)} lignes (supprime : {len(df_raw)-len(df)})")
+
+          # Afficher les lignes supprimees par dropna
+          if len(df_raw) != len(df):
+              dropped = df_raw[~df_raw.index.isin(df.index)]
+              print("Lignes supprimees par dropna :")
+              print(dropped.to_string())
+
+          # Conversion date
+          before = len(df)
+          df['Date de publication'] = pd.to_datetime(
+              df['Date de publication'], format='%d/%m/%Y', errors='coerce'
+          ).dt.strftime('%d/%m/%Y')
+          nat_count = df['Date de publication'].isna().sum()
+          print(f"3. Apres conversion date : {len(df)} lignes, NaT : {nat_count}")
+          if nat_count > 0:
+              print("Lignes avec date invalide (NaT) :")
+              mask_nat = df['Date de publication'].isna()
+              print(df[mask_nat][list(df.columns[:3])].to_string())
+
+          # Filtre Focus
           cat_cols = [c for c in df.columns if 'atégorie' in c]
           mask_focus = df[cat_cols].apply(
-              lambda col: col.str.lower().str.strip().isin(['focus lettre', 'focus-lettre'])
+              lambda col: col.str.lower().str.strip().isin(['focus lettre', 'focus-lettre', 'focus'])
           ).any(axis=1)
-          nb_exclus = mask_focus.sum()
+          nb_focus = mask_focus.sum()
+          print(f"4. Articles Focus exclus : {nb_focus}")
           df = df[~mask_focus]
-          
-          df.to_csv('base-uneiaparjour.csv', index=False, encoding='utf-8')
-          print(f"CSV généré : {len(df)} lignes, {len(df.columns)} colonnes ({nb_exclus} Focus Lettre exclus)")
-          EOF
+          print(f"5. Final CSV : {len(df)} lignes")
 
-      - name: Commit et push CSV
+          # Verifier les 5 premieres et dernieres lignes
+          print("Premieres lignes :")
+          print(df.head(3)[['Titre', 'Date de publication']].to_string())
+          print("Dernieres lignes :")
+          print(df.tail(3)[['Titre', 'Date de publication']].to_string())
+
+          df.to_csv('base-uneiaparjour.csv', index=False, encoding='utf-8')
+          print(f"CSV ecrit : {len(df)} lignes")
+          EOF
+      - name: Commit CSV
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add base-uneiaparjour.csv
-          git diff --cached --quiet || git commit -m "🔄 Mise à jour CSV ($(date +%Y-%m-%d))"
+          git diff --cached --quiet || git commit -m "Mise a jour CSV ($(date +%Y-%m-%d))"
           git push
-
-      - name: Synchroniser vers Hugging Face
+      - name: Sync Hugging Face
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           git lfs install
-          
           git clone https://huggingface.co/datasets/uneIAparjour/base hf-dataset
           cd hf-dataset
-          
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git remote set-url origin https://uneIAparjour:${HF_TOKEN}@huggingface.co/datasets/uneIAparjour/base
-          
           cp ../base-uneiaparjour.csv .
           cp ../base-uneiaparjour.ods .
           cp ../huggingface-README.md README.md
-          
           git add -A
-          git diff --cached --quiet || git commit -m "🔄 Mise à jour base ($(date +%Y-%m-%d))"
+          git diff --cached --quiet || git commit -m "Mise a jour base ($(date +%Y-%m-%d))"
           git push
