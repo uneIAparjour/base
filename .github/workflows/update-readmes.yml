@@ -9,6 +9,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Install deps
+        run: pip install pandas
       - name: Update READMEs
         run: |
           python3 << 'EOF'
