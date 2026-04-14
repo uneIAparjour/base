@@ -13,9 +13,10 @@ jobs:
         run: |
           python3 << 'EOF'
           import re
+          import pandas as pd
           from datetime import datetime, timezone
 
-          nb = sum(1 for line in open('base-uneiaparjour.csv') if line.strip()) - 1
+          nb = len(pd.read_csv('base-uneiaparjour.csv'))
           date = datetime.now(timezone.utc).strftime('%d/%m/%Y')
 
           for fname, patterns in {
