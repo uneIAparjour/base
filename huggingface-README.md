@@ -48,7 +48,7 @@ Chaque jour, un nouvel outil d'IA générative gratuit ou freemium est testé, d
 
 ## Contenu
 
-- **1158 outils** (au 14/04/2026)
+- **1151 outils** (au 14/04/2026)
 - **33 catégories** : chatbot, images, texte, vidéo, musique, éducation, open source…
 - **Période** : 16 février 2023 → 14/04/2026
 - **Langue** : français
