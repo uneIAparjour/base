@@ -1,29 +1,22 @@
 name: nightly-ods-update
-
 on:
   schedule:
     - cron: "0 2 * * *"
   workflow_dispatch:
-
 permissions:
   contents: write
-
 jobs:
   update:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-
       - name: Install deps
         run: pip install feedparser odfpy pandas
-
       - name: Update ODS
         id: update_ods
         run: |
@@ -33,7 +26,6 @@ jobs:
           else
             echo "modified=false" >> $GITHUB_OUTPUT
           fi
-
       - name: Generate CSV
         if: steps.update_ods.outputs.modified == 'true'
         run: |
@@ -48,17 +40,14 @@ jobs:
           df.to_csv('base-uneiaparjour.csv', index=False, encoding='utf-8')
           print(f"CSV : {len(df)} lignes")
           EOF
-
       - name: Update READMEs
         if: steps.update_ods.outputs.modified == 'true'
         run: |
           python3 << 'EOF'
           import re
           from datetime import datetime, timezone
-
-          nb = sum(1 for _ in open('base-uneiaparjour.csv')) - 1
+          nb = sum(1 for line in open('base-uneiaparjour.csv') if line.strip()) - 1
           date = datetime.now(timezone.utc).strftime('%d/%m/%Y')
-
           for fname, patterns in {
               'README.md': [
                   (r'\*\*\d[\d ]* outils\*\* recensés \(au [^\)]+\)', f'**{nb} outils** recensés (au {date})'),
@@ -68,6 +57,9 @@ jobs:
                   (r'\*\*\d[\d ]* outils\*\* \(au [^\)]+\)', f'**{nb} outils** (au {date})'),
                   (r'\*\*Période\*\* : .+', f'**Période** : 16 février 2023 → {date}'),
                   (r'Base de données du site uneIAparjour\.fr au [\d/]+, Bertrand', f'Base de données du site uneIAparjour.fr au {date}, Bertrand'),
+              ],
+              'agent.md': [
+                  (r'\*\*\d[\d ]* outils\*\* référencés \(au [^\)]+\)', f'**{nb} outils** référencés (au {date})'),
               ],
           }.items():
               content = open(fname, encoding='utf-8').read()
@@ -81,10 +73,9 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add base-uneiaparjour.ods base-uneiaparjour.csv README.md huggingface-README.md
+          git add base-uneiaparjour.ods base-uneiaparjour.csv README.md huggingface-README.md agent.md
           git diff --cached --quiet || git commit -m "nightly update $(date -u +'%d/%m/%Y')"
           git push
-
       - name: Sync Hugging Face
         if: steps.update_ods.outputs.modified == 'true'
         env:
