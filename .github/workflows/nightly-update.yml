@@ -30,15 +30,66 @@ jobs:
         if: steps.update_ods.outputs.modified == 'true'
         run: |
           python3 << 'EOF'
-          import pandas as pd
-          df = pd.read_excel('base-uneiaparjour.ods', engine='odf', sheet_name='Base')
-          df = df.dropna(how='all')
-          df['Date de publication'] = pd.to_datetime(df['Date de publication'], format='%d/%m/%Y').dt.strftime('%d/%m/%Y')
-          cat_cols = [c for c in df.columns if 'atégorie' in c]
-          mask_focus = df[cat_cols].apply(lambda col: col.str.lower().str.strip().isin(['focus lettre', 'focus-lettre', 'focus'])).any(axis=1)
-          df = df[~mask_focus]
-          df.to_csv('base-uneiaparjour.csv', index=False, encoding='utf-8')
-          print(f"CSV : {len(df)} lignes")
+          import csv
+          from odf.opendocument import load
+          from odf.table import Table, TableRow, TableCell
+          from odf.text import P
+
+          FOCUS_VALUES = {'focus lettre', 'focus-lettre', 'focus'}
+
+          def get_cell_text(cell):
+              ps = cell.getElementsByType(P)
+              if not ps:
+                  return ''
+              p = ps[0]
+              text = ''
+              for node in p.childNodes:
+                  if hasattr(node, 'data'):
+                      text += node.data
+                  elif hasattr(node, 'childNodes'):
+                      for child in node.childNodes:
+                          if hasattr(child, 'data'):
+                              text += child.data
+              return text
+
+          def expand_row(row):
+              cells = row.getElementsByType(TableCell)
+              result = []
+              for cell in cells:
+                  repeat = int(cell.getAttribute('numbercolumnsrepeated') or 1)
+                  text = get_cell_text(cell)
+                  result.extend([text] * repeat)
+              return result
+
+          doc = load('base-uneiaparjour.ods')
+          sheets = doc.spreadsheet.getElementsByType(Table)
+          base_sheet = next(s for s in sheets if s.getAttribute('name') == 'Base')
+          rows = base_sheet.getElementsByType(TableRow)
+
+          header = expand_row(rows[0])
+          cat_indices = [i for i, h in enumerate(header) if 'atégorie' in h]
+
+          output_rows = []
+          for row in rows[1:]:
+              values = expand_row(row)
+              # Ignorer les lignes entièrement vides
+              if not any(v.strip() for v in values):
+                  continue
+              # Ignorer les lignes Focus
+              cats = [values[i].strip().lower() for i in cat_indices if i < len(values)]
+              if any(c in FOCUS_VALUES for c in cats):
+                  continue
+              output_rows.append(values)
+
+          # Tronquer toutes les lignes à la longueur du header
+          n = len(header)
+          with open('base-uneiaparjour.csv', 'w', newline='', encoding='utf-8') as f:
+              writer = csv.writer(f)
+              writer.writerow(header[:n])
+              for r in output_rows:
+                  writer.writerow(r[:n])
+
+          print(f"CSV : {len(output_rows)} lignes")
           EOF
       - name: Update READMEs
         if: steps.update_ods.outputs.modified == 'true'
