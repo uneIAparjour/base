@@ -58,6 +58,9 @@ jobs:
           rows = base_sheet.getElementsByType(TableRow)
 
           header = expand_row(rows[0])
+        # Supprimer les colonnes vides de fin (numbercolumnsrepeated ODS)
+          while header and not header[-1].strip():
+          header.pop()
           cat_indices = [i for i, h in enumerate(header) if 'atégorie' in h]
 
           output_rows = []
