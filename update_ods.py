@@ -166,8 +166,8 @@ def fetch_new_entries(last_date):
 
 
 def make_cell(val):
-    """Crée une cellule ODS avec un nœud texte explicite, lisible par pandas."""
-    cell = TableCell()
+    """Crée une cellule ODS avec valuetype string explicite, lisible par pandas."""
+    cell = TableCell(valuetype="string")
     p = P()
     p.addText(str(val))
     cell.addElement(p)
