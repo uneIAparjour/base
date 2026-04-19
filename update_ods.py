@@ -234,8 +234,13 @@ def main():
     skipped_duplicate = 0
     rows_to_insert = []
 
-    for entry in new_entries:
-        link = entry.get("link", "")
+new_entries.sort(
+    key=lambda e: parse_rss_date(e.get("published", "")) or datetime.min.replace(tzinfo=timezone.utc),
+    reverse=True
+)
+
+for entry in new_entries:
+    link = entry.get("link", "")
         if link in existing_urls:
             skipped_duplicate += 1
             print(f"   Doublon ignore : {entry.get('title', '')}")
