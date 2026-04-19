@@ -58,9 +58,9 @@ jobs:
           rows = base_sheet.getElementsByType(TableRow)
 
           header = expand_row(rows[0])
-        # Supprimer les colonnes vides de fin (numbercolumnsrepeated ODS)
           while header and not header[-1].strip():
-          header.pop()
+              header.pop()
+
           cat_indices = [i for i, h in enumerate(header) if 'atégorie' in h]
 
           output_rows = []
@@ -81,6 +81,7 @@ jobs:
           print(f"2. Lignes vides ignorees : {skipped_empty}")
           print(f"3. Articles Focus exclus : {skipped_focus}")
           print(f"4. Final CSV : {len(output_rows)} lignes")
+          print(f"5. Colonnes : {len(header)} ({header})")
 
           n = len(header)
           with open('base-uneiaparjour.csv', 'w', newline='', encoding='utf-8') as f:
@@ -91,7 +92,6 @@ jobs:
                   writer.writerow(padded[:n])
 
           print(f"CSV ecrit : {len(output_rows)} lignes")
-          # Premieres et dernieres lignes
           titre_idx = next((i for i, h in enumerate(header) if h.lower() == 'titre'), 0)
           date_idx = next((i for i, h in enumerate(header) if 'date' in h.lower()), n-1)
           print("Premieres lignes :")
