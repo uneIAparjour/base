@@ -21,50 +21,82 @@ jobs:
       - name: Generate CSV
         run: |
           python3 << 'EOF'
-          import pandas as pd
+          import csv
+          from odf.opendocument import load
+          from odf.table import Table, TableRow, TableCell
+          from odf.text import P
 
-          df_raw = pd.read_excel('base-uneiaparjour.ods', engine='odf', sheet_name='Base')
-          print(f"1. Apres lecture ODS : {len(df_raw)} lignes")
+          FOCUS_VALUES = {'focus lettre', 'focus-lettre', 'focus'}
 
-          df = df_raw.dropna(how='all')
-          print(f"2. Apres dropna(how='all') : {len(df)} lignes (supprime : {len(df_raw)-len(df)})")
+          def get_cell_text(cell):
+              ps = cell.getElementsByType(P)
+              if not ps:
+                  return ''
+              p = ps[0]
+              text = ''
+              for node in p.childNodes:
+                  if hasattr(node, 'data'):
+                      text += node.data
+                  elif hasattr(node, 'childNodes'):
+                      for child in node.childNodes:
+                          if hasattr(child, 'data'):
+                              text += child.data
+              return text
 
-          # Afficher les lignes supprimees par dropna
-          if len(df_raw) != len(df):
-              dropped = df_raw[~df_raw.index.isin(df.index)]
-              print("Lignes supprimees par dropna :")
-              print(dropped.to_string())
+          def expand_row(row):
+              cells = row.getElementsByType(TableCell)
+              result = []
+              for cell in cells:
+                  repeat = int(cell.getAttribute('numbercolumnsrepeated') or 1)
+                  text = get_cell_text(cell)
+                  result.extend([text] * repeat)
+              return result
 
-          # Conversion date
-          before = len(df)
-          df['Date de publication'] = pd.to_datetime(
-              df['Date de publication'], format='%d/%m/%Y', errors='coerce'
-          ).dt.strftime('%d/%m/%Y')
-          nat_count = df['Date de publication'].isna().sum()
-          print(f"3. Apres conversion date : {len(df)} lignes, NaT : {nat_count}")
-          if nat_count > 0:
-              print("Lignes avec date invalide (NaT) :")
-              mask_nat = df['Date de publication'].isna()
-              print(df[mask_nat][list(df.columns[:3])].to_string())
+          doc = load('base-uneiaparjour.ods')
+          sheets = doc.spreadsheet.getElementsByType(Table)
+          base_sheet = next(s for s in sheets if s.getAttribute('name') == 'Base')
+          rows = base_sheet.getElementsByType(TableRow)
 
-          # Filtre Focus
-          cat_cols = [c for c in df.columns if 'atégorie' in c]
-          mask_focus = df[cat_cols].apply(
-              lambda col: col.str.lower().str.strip().isin(['focus lettre', 'focus-lettre', 'focus'])
-          ).any(axis=1)
-          nb_focus = mask_focus.sum()
-          print(f"4. Articles Focus exclus : {nb_focus}")
-          df = df[~mask_focus]
-          print(f"5. Final CSV : {len(df)} lignes")
+          header = expand_row(rows[0])
+          cat_indices = [i for i, h in enumerate(header) if 'atégorie' in h]
 
-          # Verifier les 5 premieres et dernieres lignes
+          output_rows = []
+          skipped_empty = 0
+          skipped_focus = 0
+          for row in rows[1:]:
+              values = expand_row(row)
+              if not any(v.strip() for v in values):
+                  skipped_empty += 1
+                  continue
+              cats = [values[i].strip().lower() for i in cat_indices if i < len(values)]
+              if any(c in FOCUS_VALUES for c in cats):
+                  skipped_focus += 1
+                  continue
+              output_rows.append(values)
+
+          print(f"1. Lignes lues : {len(rows) - 1}")
+          print(f"2. Lignes vides ignorees : {skipped_empty}")
+          print(f"3. Articles Focus exclus : {skipped_focus}")
+          print(f"4. Final CSV : {len(output_rows)} lignes")
+
+          n = len(header)
+          with open('base-uneiaparjour.csv', 'w', newline='', encoding='utf-8') as f:
+              writer = csv.writer(f)
+              writer.writerow(header[:n])
+              for r in output_rows:
+                  padded = r + [''] * (n - len(r))
+                  writer.writerow(padded[:n])
+
+          print(f"CSV ecrit : {len(output_rows)} lignes")
+          # Premieres et dernieres lignes
+          titre_idx = next((i for i, h in enumerate(header) if h.lower() == 'titre'), 0)
+          date_idx = next((i for i, h in enumerate(header) if 'date' in h.lower()), n-1)
           print("Premieres lignes :")
-          print(df.head(3)[['Titre', 'Date de publication']].to_string())
+          for r in output_rows[:3]:
+              print(f"  {r[titre_idx]} — {r[date_idx]}")
           print("Dernieres lignes :")
-          print(df.tail(3)[['Titre', 'Date de publication']].to_string())
-
-          df.to_csv('base-uneiaparjour.csv', index=False, encoding='utf-8')
-          print(f"CSV ecrit : {len(df)} lignes")
+          for r in output_rows[-3:]:
+              print(f"  {r[titre_idx]} — {r[date_idx]}")
           EOF
       - name: Commit CSV
         run: |
