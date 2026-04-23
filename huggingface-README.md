@@ -48,9 +48,9 @@ Chaque jour, un nouvel outil d'IA générative gratuit ou freemium est testé, d
 
 ## Contenu
 
-- **1159 outils** (au 22/04/2026)
+- **1160 outils** (au 23/04/2026)
 - **33 catégories** : chatbot, images, texte, vidéo, musique, éducation, open source…
-- **Période** : 16 février 2023 → 22/04/2026
+- **Période** : 16 février 2023 → 23/04/2026
 - **Langue** : français
 
 ## Champs
@@ -88,4 +88,4 @@ Newsletter : [Substack](https://uneiaparjour.substack.com/)
 
 Licence : [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
-> Base de données du site uneIAparjour.fr au 22/04/2026, Bertrand Formet, licence CC BY 4.0.
+> Base de données du site uneIAparjour.fr au 23/04/2026, Bertrand Formet, licence CC BY 4.0.
