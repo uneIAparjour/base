@@ -1,4 +1,6 @@
 Titre,Description,URL sur uneiaparjour.fr,Catégorie 1,Catégorie 2,Catégorie 3,Catégorie 4,Catégorie 5,Catégorie 6,Date de publication
+Podcasty,Podcasty (https://podcasty.fm/) génère des épisodes de podcast à partir d’articles en lignes.,https://www.uneiaparjour.fr/podcasty/,voix,,,,,,24/04/2026
+Reka,"Reka (https://reka.ai/ et modèles : https://huggingface.co/RekaAI) propose plusieurs modèles multimodaux dédiés à l’analyse d’images et de vidéos, au texte et à la voix.",https://www.uneiaparjour.fr/reka-2/,chatbot,documents,images,langues,LLM,open source,25/04/2026
 ChatGPT images 2.0,ChatGPT images 2.0 (https://chatgpt.com/) est le dernier modèle de génération d’images de ChatGPT.,https://www.uneiaparjour.fr/chatgpt-images-2-0/,chatbot,images,,,,,23/04/2026
 NBot,NBot (https://nbot.ai/) génère une veille automatisée à partir d’une instruction et la réponse à des questions qui permettent de l’affiner.,https://www.uneiaparjour.fr/nbot/,actualités et fact-checking,,,,,,22/04/2026
 Gemini 3.1 TTS Preview,Gemini 3.1 TTS Preview (démonstration sur Google Ai studio https://aistudio.google.com/generate-speech?model=gemini-3.1-flash-tts-preview) est le dernier modèles texte vers voix de Google.,https://www.uneiaparjour.fr/gemini-3-1-tts-preview/,usage illimité,voix,,,,,21/04/2026
