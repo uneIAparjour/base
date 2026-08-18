@@ -128,6 +128,7 @@ def get_last_date_from_ods(ods_path):
 def fetch_new_entries(last_date):
     new_entries = []
     seen_links = set()
+    skipped_en = 0
     page = 1
 
     while True:
@@ -146,6 +147,16 @@ def fetch_new_entries(last_date):
                 continue
             seen_links.add(link)
 
+            # English translations (uneiaparjour.fr/en/...) started being
+            # published in 2026-08 by a separate translation pipeline. This
+            # base is French-only by design (an EN base is a separate future
+            # project) — explicitly excluding /en/ here, rather than relying
+            # on Polylang's own feed filtering, since a contaminated base
+            # would be hard to clean up after the fact and this check is free.
+            if "/en/" in link:
+                skipped_en += 1
+                continue
+
             pub_date = parse_rss_date(entry.get("published", ""))
             if pub_date and last_date and pub_date <= last_date:
                 found_older = True
@@ -161,6 +172,9 @@ def fetch_new_entries(last_date):
 
         page += 1
         time.sleep(DELAY)
+
+    if skipped_en:
+        print(f"   {skipped_en} article(s) EN ignores (base FR uniquement)")
 
     return new_entries
 
