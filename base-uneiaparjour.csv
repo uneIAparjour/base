@@ -519,7 +519,7 @@ Manus,Manus (https://manus.im) automatise les tâches complexes qui lui sont don
 Athena Edu,"Athena Edu (https://athenaedu.ai/) accompagne la créationd e contenus pédagogiques : génération d'un plan de cours, interrogation de documents ou de vidéos, quiz, courriels, lettres... Contenu éditables et partageables via une URL. Des chatbots pour accompagner par questionnement sont disponibles et la création de chatbots personnalisés et partageables &#8211; « les tuteurs » &#8211; est proposée avec suivi ...",https://www.uneiaparjour.fr/athena-edu/,documents,éducation,quiz et flashcards,texte,,,04/04/2025
 Masterymate,"Masterymate (https://masterymate.ai/) accompagne la génération de séquences pédagogiques basées sur « l'apprentissage par projet » (Project-Base Learning cf Edubref IFE : https://eduveille.hypotheses.org/files/2019/07/Edubref-octobre-2019.pdf) à partir de trois étapes : &#8211; le cadre,&#8211; les activités,&#8211; l'évaluation et les pistes de réflexion complémentaire. Édition manuelle ou via une instruction. La génération parfois en anglais peut être traduite par une instruction ...",https://www.uneiaparjour.fr/masterymate/,éducation,usage illimité,,,,,03/04/2025
 Infographics,Infographics (https://infographics.so/) génère des infographies simples à partir d'une instruction. 8 modèles proposés avec 3 variations de style. Création de styles et édition de tous les éléments générés. FR ok dans les instructions mais textes générés en anglais même si FR précisé. 25 générations gratuites par mois. (Source : https://fr.wikipedia.org/wiki/Pr%C3%A9histoire),https://www.uneiaparjour.fr/infographics/,présentation,infographie,,,,,02/04/2025
-Meta AI,"Meta AI (WhatsApp : https://faq.whatsapp.com/2257017191175152 / Messenger : https://www.facebook.com/help/messenger-app/671966618200379 ) est l’agent conversationnel texte de Meta basé sur Llama 3.2 et intégré à WhatsApp et Messenger. Connecté au web, donne des réponses avec liens actifs parfois aléatoirement. Accessible dans les messageries via ce cercle : Intégration à Facebook et Instagram annoncée mais non disponible pendant ...",https://www.uneiaparjour.fr/meta-ai/,chatbot,texte,usage illimité,,,,01/04/2025
+Meta AI,"Meta AI (WhatsApp : https://faq.whatsapp.com/2257017191175152 / Messenger : https://www.facebook.com/help/messenger-app/671966618200379 ) est l’agent conversationnel texte de Meta basé sur Llama 3.2 et intégré à WhatsApp et Messenger. Connecté au web, donne des réponses avec liens actifs parfois aléatoirement. Accessible dans les messageries via ce cercle : Intégration à Facebook et Instagram annoncée mais non disponible pendant ...",https://www.uneiaparjour.fr/meta-ai-messageries/,chatbot,texte,usage illimité,,,,01/04/2025
 Deepsite,"Deepsite (https://huggingface.co/spaces/enzostvs/deepsite) génère une page de code unique à partir d'une instruction pour créer des applications ou pages web. Le code est interprété en direct et le résultat est visible. Les interactions pour correction ou interprétation sont possibles. Basé sur le modèle Deepseek V3, le code peut être copié collé ou hébergé sur un espace ...",https://www.uneiaparjour.fr/deepsite/,application,open source,usage illimité,,,,31/03/2025
 Director,"T2v-01 Director (https://hailuoai.video), un nouveau modèle de génération de vidéos de Haiuoai, permet le choix des mouvements de caméra dans la vidéo qui sera générée. 18 mouvements possibles, jusqu'à 3 mouvements combinables dans la même vidéo.Image to video et text to video. 100 crédits gratuits par jour (3 vidéos).",https://www.uneiaparjour.fr/director/,vidéo,,,,,,30/03/2025
 Outils de Monica,"La boîte à outils de Monica (https://monica.im/tools) &#8211; dont l'extension avait déjà été décrite ici &#8211; regroupe une série d'outils d'IA générative dédiés au texte, aux documents aux images, à la voix et à la vidéo. Liste dans les captures ci-dessous. Les modèles textes et imagesles plus utilisés sont présents et sont accessibles dans ...",https://www.uneiaparjour.fr/outils-de-monica/,chatbot,documents,images,texte,,,29/03/2025
@@ -692,7 +692,7 @@ Hermes 3,"Hermes 3 (https://lambda.chat/chatui/) est un modèle de langage basé
 AI video API,"AI video API (https://aivideoapi.com) génère de courtes vidéos (5/6 secondes) à partir d’une requête et/ou une image. Utilise RunwayML (Pika, Sora, Luma et Stability annoncés). 5 générations gratuites.",https://www.uneiaparjour.fr/ai-video-api/,vidéo,,,,,,12/10/2024
 Fastflux,Fastflux (https://fastflux.ai) utilise le modèle Flux 1.0 pour des générations d’imagestrès rapides. Par @RunwareAI. Illimité et sans compte.,https://www.uneiaparjour.fr/fastflux/,images,sans compte,usage illimité,,,,11/10/2024
 Coursezy,Coursezy (http://coursezy.online) génère des cours en ligne jusqu’au 5 chapitres avec vidéo YouTube et quiz à partir d’une requête et un niveau de difficulté. 3 générations gratuites. Test : https://coursezy.online/course/3520ad99-65c6-4310-a04a-f3e77766a7a4… (accès avec compte),https://www.uneiaparjour.fr/coursezy/,éducation,quiz et flashcards,,,,,10/10/2024
-Boosum,"Boosum (https://boosum.dev) résume des fichiers pdf jusqu’à 50 Mo (orienté livres mais tous types de documents pdf) + accompagne ces résumés d’un chatbot. Résumés par chapitres, surlignage. Tests : ambition IA France / guerre des boutons. Beta gratuite.",https://www.uneiaparjour.fr/7874-2/,documents,usage illimité,,,,,09/10/2024
+Boosum,"Boosum (https://boosum.dev) résume des fichiers pdf jusqu’à 50 Mo (orienté livres mais tous types de documents pdf) + accompagne ces résumés d’un chatbot. Résumés par chapitres, surlignage. Tests : ambition IA France / guerre des boutons. Beta gratuite.",https://www.uneiaparjour.fr/boosum/,documents,usage illimité,,,,,09/10/2024
 Lingolette,"Lingolette (https://lingolette.com) accompagne l’apprentissage des langues via des situations de la vie courante dans un chatbot texte et voix, jeux, flashcards et exercices de compréhension. Correction instantanée. Version premium avec plus d’exercices.",https://www.uneiaparjour.fr/lingolette/,langues,,,,,,08/10/2024
 Storytell,Storytell (https://storytell.ai) : chatbot basé sur une base de données ,https://www.uneiaparjour.fr/storytell/,chatbot,documents,données,texte,usage illimité,,07/10/2024
 School AI,School AI (https://schoolai.com) regroupe un ensemble d’outils dédiés aux ,https://www.uneiaparjour.fr/school-ai/,éducation,,,,,,06/10/2024
@@ -814,7 +814,7 @@ Dream Machine,Dream Machine de Luma Labs (https://lumalabs.ai/dream-machine) gé
 Seelab,Seelab (https://seelab.ai @seelab_app) est un outil – français – dédié à la ,https://www.uneiaparjour.fr/7045-2/,images,,,,,,11/06/2024
 AI Writer,AI Writer (https://ai-writer.org) génère des textes à partir d’une requête ,https://www.uneiaparjour.fr/ai-writer/,sans compte,texte,usage illimité,,,,10/06/2024
 People ai,People ai (https://peopleai.app) propose de converser avec des 96 ,https://www.uneiaparjour.fr/people-ai/,chatbot,sans compte,usage illimité,,,,09/06/2024
-NotebookLLM,"Une bibliothèque de documents, des notes et un modèle de langage réunis ? ",https://www.uneiaparjour.fr/notebookllm/,documents,,,,,,08/06/2024
+NotebookLLM,"Une bibliothèque de documents, des notes et un modèle de langage réunis ? ",https://www.uneiaparjour.fr/notebooklm/,documents,,,,,,08/06/2024
 AI Chat de DuckDuckGo,AI Chat de @DuckDuckGo (https://duckduckgo.com) propose 4 LLM (GPT 3.5 et ,https://www.uneiaparjour.fr/ai-chat-de-duckduckgo/,recherche,usage illimité,,,,,07/06/2024
 NousWise,NousWise (https://nouswise.com) : outil de recherche basé sur nos propres ,https://www.uneiaparjour.fr/nouswise/,documents,usage illimité,,,,,06/06/2024
 Zebracat,"Zebracat (http://zebracat.ai) génère des vidéos (images, voix et musique) à ",https://www.uneiaparjour.fr/zebracat/,vidéo,,,,,,05/06/2024
@@ -970,7 +970,7 @@ Image Mixer,Image Mixer (https://cloud.lambdalabs.com/demos/lambda/image-mixer-d
 Paint AI,Paint AI (https://paintai.groupmind.co.uk) : un outil de dessin simple… ,https://www.uneiaparjour.fr/paint-ai/,images,open source,sans compte,usage illimité,,,14/01/2024
 QR Code AI Art Generator,QR Code AI Art Generator ,https://www.uneiaparjour.fr/qr-code-ai-art-generator/,images,qr code,,,,,13/01/2024
 Reelcraft,"Reelcraft (https://reelcraft.ai) génère des histoires animées – vidéo, voix ",https://www.uneiaparjour.fr/reelcraft/,texte,vidéo,voix,,,,12/01/2024
-Quizizz,"Quizizz (https://quizizz.com) génère des quiz à partir d’un prompt, d’un ",https://www.uneiaparjour.fr/quizizz/,documents,éducation,quiz et flashcards,youtube,,,11/01/2024
+Quizizz,"Quizizz (https://quizizz.com) génère des quiz à partir d’un prompt, d’un ",https://www.uneiaparjour.fr/quizizz-wayground/,documents,éducation,quiz et flashcards,youtube,,,11/01/2024
 D&AViz,D&AViz (https://dnaviz.aipeople.arivu-iq.com) analyse les données fournies ,https://www.uneiaparjour.fr/daviz/,données,,,,,,10/01/2024
 GPTS2D,GPTS2D (https://gpts2d.com) crée des agents spécialisés capables de ,https://www.uneiaparjour.fr/gpts2d/,chatbot,mindmap,,,,,09/01/2024
 Jotbot,"Jotbot (https://myjotbot.com) propose la rédaction, la génération, la ",https://www.uneiaparjour.fr/jotbot/,chatbot,documents,texte,youtube,,,08/01/2024
@@ -1110,7 +1110,7 @@ PrepSup,PrepSup (https://prepsup.com) accompagne l’apprentissage d’une notio
 Hix,Hix (http://hix.ai) regroupe 120 outils de génération de texte basés sur ,https://www.uneiaparjour.fr/hix/,texte,,,,,,27/08/2023
 Flair,Flair (http://flair.ai) met en scène des objets à partir de paramètres ,https://www.uneiaparjour.fr/flair/,images,,,,,,26/08/2023
 Artsio,Artsio (https://artsio.xyz/create) : outil de génération d’imagesavec 5 ,https://www.uneiaparjour.fr/artsio/,images,,,,,,25/08/2023
-Write Tone,Write Tone (https://writetone.com) : outil de génération de texte qui ,https://www.uneiaparjour.fr/write-tone/,texte,usage illimité,,,,,24/08/2023
+Write Tone,Write Tone (https://writetone.com) : outil de génération de texte qui ,https://www.uneiaparjour.fr/write-tone-2/,texte,usage illimité,,,,,24/08/2023
 Ideogram,Ideogram (https://ideogram.ai) : outil de génération d’imagescapable ,https://www.uneiaparjour.fr/ideogram/,images,usage illimité,,,,,23/08/2023
 Bloombot,Bloombot (https://chat.bloombot.ai) : un chatbot dédié à l’apprentissage ,https://www.uneiaparjour.fr/bloombot/,chatbot,texte,usage illimité,,,,22/08/2023
 Transvibe,Transvibe (https://transvribe.com) permet l’interrogation d’une vidéo ,https://www.uneiaparjour.fr/transvibe/,open source,sans compte,texte,usage illimité,youtube,,21/08/2023
@@ -1144,7 +1144,7 @@ Minerva,Minerva (https://academicid.net/minerva-ai) recherche parmi 200M de ,htt
 LLAMA,"Envie de tester Llama2, modèle open source de @MetaAI ? 3 outils découverts ",https://www.uneiaparjour.fr/llama/,chatbot,LLM,open source,texte,,,24/07/2023
 Learnbot,Learnbot (https://apps.apple.com/my/app/learnbot-pro-annual/id6448216859…) ,https://www.uneiaparjour.fr/learnbot/,éducation,texte,,,,,23/07/2023
 Diffit,"Diffit (https://beta.diffit.me), outil de génération de texte dédié aux ",https://www.uneiaparjour.fr/diffit/,éducation,texte,usage illimité,,,,22/07/2023
-QuestionWell,QuestionWell (http://questionwell.org) : un outil dédié aux enseignants ,https://www.uneiaparjour.fr/questionwell-2/,éducation,quiz et flashcards,texte,,,,21/07/2023
+QuestionWell,QuestionWell (http://questionwell.org) : un outil dédié aux enseignants ,https://www.uneiaparjour.fr/questionwell/,éducation,quiz et flashcards,texte,,,,21/07/2023
 AI Dungeon,Un jeu de rôle textuel entièrement généré par l’IA ? C’est le pari réussi ,https://www.uneiaparjour.fr/ai-dungeon/,jeu vidéo,,,,,,20/07/2023
 Reemix,Reemix (Reemix.co) génrère de courtes vidéo avec musique à partir d’un ,https://www.uneiaparjour.fr/reemix/,sans compte,usage illimité,vidéo,,,,19/07/2023
 Pathfinder,Pathfinder (https://www.summit.im/pathfinder) propose une stratégie ,https://www.uneiaparjour.fr/pathfinder/,sans compte,texte,usage illimité,,,,18/07/2023
@@ -1190,7 +1190,7 @@ Kreado,Kreado (https://kreadoai.com) : de la génération de texte à la product
 BookHero,"Un prompt, un personnage, un trait de caractère et un lieu : BookHero ",https://www.uneiaparjour.fr/bookhero/,histoires enfants,images,texte,,,,08/06/2023
 Aitubo,Aitubo (http://aitubo.ai) : outil regroupant plusieurs modèles d’IA ,https://www.uneiaparjour.fr/aitubo/,images,,,,,,07/06/2023
 Albus,Albus (http://albus.org) : un tableau généré pour explorer un sujet via ,https://www.uneiaparjour.fr/albus/,éducation,images,texte,usage illimité,,,06/06/2023
-Recraft,Recraft (http://recraft.ai) : outil d’IA génératives d’imagespermettant la ,https://www.uneiaparjour.fr/recraft/,archives,,,,,,05/06/2023
+Recraft,Recraft (http://recraft.ai) : outil d’IA génératives d’imagespermettant la ,https://www.uneiaparjour.fr/recraft-1/,archives,,,,,,05/06/2023
 Todobot,Todobot (http://todobot.ai) améliore les listes de tâches grâce à l’IA. Les ,https://www.uneiaparjour.fr/todobot/,texte,usage illimité,,,,,04/06/2023
 Fini,Un chatbot avec une base de connaissance personnalisée sous ChatGPT à ,https://www.uneiaparjour.fr/fini-2/,chatbot,texte,,,,,03/06/2023
 The infinite drum machine,The infinite drum machine ,https://www.uneiaparjour.fr/the-infinite-drum-machine/,musique,open source,usage illimité,,,,02/06/2023
@@ -1255,7 +1255,7 @@ Steve,Un script ou un page web et http://steve.ai génére une vidéo ou une ,ht
 Scenario,"45 IA génératives d’images(dont stable diffusion) dans un même outil, ",https://www.uneiaparjour.fr/scenario-45-ia-generatives-dimages-dont-stable/,images,,,,,,04/04/2023
 StudioGPT,"Une image générée dans un nouveau style ? Un prompt, une image chargée et ",https://www.uneiaparjour.fr/studiogpt/,images,,,,,,03/04/2023
 Story Wizard,"Choix d’un personnage principal, description rapide et @StorywizardAIcrée ",https://www.uneiaparjour.fr/story-wizard/,histoires enfants,images,texte,,,,02/04/2023
-Quiz Wizard,Un quiz généré à partir d’un document ou d’un prompt ? @wooclap propose ,https://www.uneiaparjour.fr/un-quiz-genere-a-partir-dun-document-ou-dun/,quiz et flashcards,texte,usage illimité,,,,01/04/2023
+Quiz Wizard,Un quiz généré à partir d’un document ou d’un prompt ? @wooclap propose ,https://www.uneiaparjour.fr/quiz-wizard/,quiz et flashcards,texte,usage illimité,,,,01/04/2023
 Gen1 de Runway,"Avec l’outil « Gen-1 : Video to video » de @runwayml (version beta), ",https://www.uneiaparjour.fr/gen1-de-runway/,vidéo,,,,,,31/03/2023
 Catbird,"15 IA génératives d’imagesqui produisent à partir d’un seul prompt, dans ",https://www.uneiaparjour.fr/catbird/,images,,,,,,30/03/2023
 Type,Type : une IA générative de texte avec outil de mise en page. http://type.ai,https://www.uneiaparjour.fr/type-type-une-ia-generative-de-texte-avec-outil/,texte,,,,,,29/03/2023
@@ -1270,7 +1270,7 @@ Nat.dev,"Tester 25 IA génératives de texte (dont Chat GPT 4, Da Vinci, Claude�
 Imagine,"“Imagine” de @MagicStudio : IA générative d’imagesavec édition du prompt, ",https://www.uneiaparjour.fr/imagine/,images,,,,,,20/03/2023
 Ludo,Ludo propose d’assister la création d’un jeu vidéo : de l’idéation en ,https://www.uneiaparjour.fr/ludo/,images,jeu vidéo,texte,,,,19/03/2023
 Boomy,Envie d’une production musicale unique ? Boomy propose de s’en charger : ,https://www.uneiaparjour.fr/boomy/,musique,,,,,,18/03/2023
-Bing,"Une fois n’est pas coutume, un poids lourd dans une #uneIAparjour : le ",https://www.uneiaparjour.fr/bing/,chatbot,recherche,usage illimité,,,,17/03/2023
+Bing,"Une fois n’est pas coutume, un poids lourd dans une #uneIAparjour : le ",https://www.uneiaparjour.fr/bing-copilot/,chatbot,recherche,usage illimité,,,,17/03/2023
 Rytr,Un outil d’aide à l’écriture pour cette nouvelle #uneIAparjour : . 30 ,https://www.uneiaparjour.fr/rytr/,texte,,,,,,16/03/2023
 Modulo AI assistant,Pour cette nouvelle #uneIAparjour voici l’assistant de Modulo de @Tart2000 ,https://www.uneiaparjour.fr/modulo-ai-assistant/,éducation,,,,,,15/03/2023
 Nolej,"Nolej créé des modules de formation à partir de textes, vidéos ou URL avec ",https://www.uneiaparjour.fr/nolej/,éducation,quiz et flashcards,,,,,14/03/2023
@@ -1286,17 +1286,17 @@ Vizcom,"En combinant dessin et prompt, Vizcom crée des imagesen rendu 3D que l�
 Paint by Text,"Paint by text, l’édition d’imagesà partir d’une requête texte. ",https://www.uneiaparjour.fr/paint-by-text-2/,images,open source,sans compte,usage illimité,,,04/03/2023
 Humata,"Un document pdf résumé et que l’on peut questionner ? Humata analyse, ",https://www.uneiaparjour.fr/humata-2/,chatbot,documents,texte,,,,03/03/2023
 Ayoa,Avec Ayoa l’IA devient génératrice d’idées mises en forme dans une carte ,https://www.uneiaparjour.fr/ayoa/,images,mindmap,texte,,,,02/03/2023
-Invideo,"Avec @InVideoOfficial, un modèle choisi, un script dans l’outil “text to ",https://www.uneiaparjour.fr/invideo-2/,vidéo,,,,,,01/03/2023
+Invideo,"Avec @InVideoOfficial, un modèle choisi, un script dans l’outil “text to ",https://www.uneiaparjour.fr/invideo/,vidéo,,,,,,01/03/2023
 Character,"Une discussion avec Platon, Tolkien, Billie Eilish, Mario, apprendre une ",https://www.uneiaparjour.fr/characterai/,texte,usage illimité,,,,,28/02/2023
 Riffusion,Envie d’une playlist de musiques qui n’existent pas encore créées au gré ,https://www.uneiaparjour.fr/riffusion/,musique,open source,sans compte,usage illimité,,,27/02/2023
 Scribble Diffusion,Un dessin à main levé précisé par un prompt et Scribble Diffusion nous ,https://www.uneiaparjour.fr/scribble-diffusion/,images,open source,sans compte,usage illimité,,,26/02/2023
 Mixo,"1 prompt, 20 secondes, 1 page web rédigée et illustrée, avec titre original ",https://www.uneiaparjour.fr/prompt-20-secondes-1-page-web-redigee-et/,site web,,,,,,25/02/2023
 YouChat,Une IA conversationnelle qui cite ses sources dans un moteur de recherche ? ,https://www.uneiaparjour.fr/youchat/,chatbot,recherche,texte,usage illimité,,,24/02/2023
-Tome,"Une requête détaillée = une présentation textes et images, c’est Tome. ",https://www.uneiaparjour.fr/tome-2/,présentation,,,,,,23/02/2023
-Lexica,"Lexica, IA génératrice d’imagesbasée sur Stable diffusion et galerie. ",https://www.uneiaparjour.fr/lexica/,images,,,,,,22/02/2023
+Tome,"Une requête détaillée = une présentation textes et images, c’est Tome. ",https://www.uneiaparjour.fr/tome/,présentation,,,,,,23/02/2023
+Lexica,"Lexica, IA génératrice d’imagesbasée sur Stable diffusion et galerie. ",https://www.uneiaparjour.fr/lexica-art/,images,,,,,,22/02/2023
 Fliki,Un texte transformé en vidéo avec voix et sous-titrage grâce à l’IA ? ,https://www.uneiaparjour.fr/flikiai/,texte,voix,,,,,21/02/2023
-Murf,Utiliser l’IA pour transcrire et dire des textes dans 120 voix et avec ,https://www.uneiaparjour.fr/murfai-2/,voix,,,,,,20/02/2023
+Murf,Utiliser l’IA pour transcrire et dire des textes dans 120 voix et avec ,https://www.uneiaparjour.fr/murf/,voix,,,,,,20/02/2023
 Playground,Une IA génératrice d’imagesboostée d’outils de retouches d’imageset d’une ,https://www.uneiaparjour.fr/playground/,images,,,,,,19/02/2023
 Mubert,"Un peu de musique générée via une requête textuelle ? Voici @mubertapp, 25 ",https://www.uneiaparjour.fr/un-peu-de-musique-generee-via-une-requete/,musique,,,,,,18/02/2023
-Poe,Pas une mais 3 IA pour cette 2ème découverte : Poe par @Quora qui regroupe ,https://www.uneiaparjour.fr/pas-une-mais-3-ia-pour-cette-2eme-decouverte-poe-2/,chatbot,LLM,texte,usage illimité,,,17/02/2023
+Poe,Pas une mais 3 IA pour cette 2ème découverte : Poe par @Quora qui regroupe ,https://www.uneiaparjour.fr/poe/,chatbot,LLM,texte,usage illimité,,,17/02/2023
 PicFinder,"Chaque jour nous découvrons de nouvelles IA génératives de textes, ",https://www.uneiaparjour.fr/chaque-jour-nous-decouvrons-de-nouvelles-ia-2/,images,sans compte,usage illimité,,,,16/02/2023
