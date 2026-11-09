@@ -38,10 +38,10 @@ actualités et fact-checking · application · archives · automatisation · ban
 
 ## Chiffres clés
 
-- **1358 outils** recensés (au 07/11/2026)
+- **1359 outils** recensés (au 09/11/2026)
 - **33 catégories**
 - **1 article par jour** depuis le 16 février 2023
-- Plage : 16/02/2023 → 07/11/2026
+- Plage : 16/02/2023 → 09/11/2026
 
 ## Aussi disponible sur
 
